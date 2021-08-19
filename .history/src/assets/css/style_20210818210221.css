@@ -1,0 +1,8 @@
+#calendar {
+  width: 80%;
+  margin: auto;
+}
+
+.fc-daygrid-day{
+  width: 100px;
+}

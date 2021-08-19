@@ -1,0 +1,117 @@
+import { Calendar, render } from '@fullcalendar/core';
+import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+
+(function () {
+    class CalendarFull {
+
+        static async init() {
+            this.events = [{
+                title: "full calendar",
+                start: "2021-08-18 09:00:00",
+                allDay: true
+            },
+            {
+                title: "Repas",
+                start: "2021-08-18 13:30:00",
+                allDay: false
+            },
+            {
+                "title": "repos",
+                "start": "2021-08-18 12:30:00",
+                "end": "2021-08-18 13:00:00",
+            },
+            {
+                title: "etude",
+                start: "2021-08-18 14:30:00",
+                allDay: false
+            },
+            {
+                title: "encore",
+                start: "2021-08-18 15:30:00",
+                allDay: false
+            },
+            {
+                title: "et toujours",
+                start: "2021-08-18 16:30:00",
+                allDay: false
+            },
+        
+        ]
+            this.addEventListeners();
+            console.log('hello');
+        }
+
+        static addEventListeners() {
+            var calendarEl = document.getElementById('calendar');
+            let calendar = new Calendar(calendarEl, {
+                plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+                locale: 'fr', // mettre la langue
+                firstDay: 1, // commence à Lundi
+                aspectRatio: 1,
+                initialView: 'dayGridMonth', //permet définir quel vue nous voulons de base
+                height: '100%', // changer la hauteur
+                eventColor: 'green', // definit une couleur par default , background + border
+                eventBackgroundColor: 'red',
+                eventDisplay: 'auto', // permet de définir l'affichage des events sur le calendrier
+                displayEventEnd: true, //permet d'afficher l'heure de fin sur les évènements qui ne dure pas une journée
+                dayMaxEvents: true, // permet de garder la hauteur des grilles , et d'ajouter un bouton pour afficher plus d'évènements
+                eventClick: (infos) => { // quand on clic sur un évènements
+                    console.log(infos.event.title);
+                    alert('Coordinates: ' + infos.jsEvent.pageX + ',' + infos.jsEvent.pageY);
+                    alert('View: ' + infos.view.type);
+                    infos.el.style.borderColor = 'purple';
+                    infos.el.style.backgroundColor = 'transparent';
+                    infos.el.style.textColor = 'black';
+                },
+                /**
+                 * Définit l'entête du calendrier aevc les bouton next prev today etc...
+                 */
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,listWeek'
+                },
+                buttonText: {
+                    today: 'Aujourd\'hui',
+                    list: 'Liste',
+                    week: 'Semaine',
+                    month: 'Mois'
+                },
+
+
+                events: this.events, // récupère les évènements en format Json [{}]
+                nowIndicator: true, // trace une ligne pour savoir ou nous en sommes dans l'agenda semaine
+                editable: true, // permet de drag and drop les évènements
+                selectable: true, // permet de cliquer sur les dates
+            
+                eventDrop: (infos) => {
+                    console.log(infos);
+                },
+                eventDrop: (infos) => {
+                    console.log(infos.event.start);
+                },
+                select: function (start, end, jsEvent, view) {
+                    console.log('click');
+                    console.log(start);
+                    let abc = prompt('Entrer le titre');
+                    let newEvent = new Object();
+                    newEvent.title = abc;
+                    newEvent.allDay = false;
+                    newEvent.start = start
+                    calendar.addEvent({
+                        title: newEvent.title,
+                        start : '2021-08-19',
+                        allDay: newEvent.allDay
+                    })
+                }
+            });
+            calendar.render();
+        }
+
+    }
+
+    CalendarFull.init();
+})();
