@@ -1,4 +1,4 @@
-import { Calendar, render } from '@fullcalendar/core';
+import { Calendar } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -92,10 +92,8 @@ import listPlugin from '@fullcalendar/list';
                  * @param {*} infos 
                  */
                 eventDrop: (infos) => {
-                    console.log(infos);
-                },
-                eventDrop: (infos) => {
                     console.log(infos.event.start);
+                    console.log(infos);
                 },
 
                 /**
