@@ -111,11 +111,14 @@ import listPlugin from '@fullcalendar/list';
                     newEvent.title = abc;
                     newEvent.allDay = false;
                     newEvent.start = start
-                    calendar.addEvent({
-                        title: newEvent.title,
-                        start : '2021-08-19',
-                        allDay: newEvent.allDay
-                    })
+                    console.log();
+                    if (newEvent.title.length >= 1) {
+                        calendar.addEvent({
+                            title: newEvent.title,
+                            start : '2021-08-19',
+                            allDay: newEvent.allDay
+                        })                        
+                    }
                 }
             });
             calendar.render();
