@@ -104,27 +104,25 @@ import listPlugin from '@fullcalendar/list';
                  * @param {*} view 
                  */
                 select: function (start, end, jsEvent, view) {
-                    console.log('click');
-                    console.log(start);
                     let abc = prompt('Entrer le titre');
                     let newEvent = new Object();
                     newEvent.title = abc;
                     newEvent.allDay = false;
                     newEvent.start = start
-                    console.log();
-                    if (newEvent.title.length >= 1) {
-                        calendar.addEvent({
-                            title: newEvent.title,
-                            start : '2021-08-19',
-                            allDay: newEvent.allDay
-                        })                        
+                    console.log(newEvent);
+                    if ( newEvent.title !== null) {
+                        if (newEvent.title.length >= 1) {
+                            calendar.addEvent({
+                                title: newEvent.title,
+                                start : '2021-08-19',
+                                allDay: newEvent.allDay
+                            })                        
+                        } 
                     }
                 }
             });
             calendar.render();
         }
-
     }
-
     CalendarFull.init();
 })();
