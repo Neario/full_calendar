@@ -3,13 +3,11 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import {AireRectangle} from './AireRectangle'
 
 (function () {
     class CalendarFull {
 
         static async init() {
-            const aire = new AireRectangle(7,7).Area
             this.events = [{
                 title: "full calendar",
                 start: "2021-08-18 09:00:00",
@@ -109,13 +107,13 @@ import {AireRectangle} from './AireRectangle'
                     let newEvent = new Object();
                     newEvent.title = abc;
                     newEvent.allDay = false;
-                    newEvent.start = start
-                    console.log(newEvent);
+                    newEvent.start = start.start
+                    console.log(start.start);
                     if ( newEvent.title !== null) {
                         if (newEvent.title.length >= 1) {
                             calendar.addEvent({
                                 title: newEvent.title,
-                                start : '2021-08-19',
+                                start : newEvent.start,
                                 allDay: newEvent.allDay
                             })                        
                         } 
