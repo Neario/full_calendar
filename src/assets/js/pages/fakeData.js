@@ -5,7 +5,6 @@ const events = [
     end: "2021-08-18 13:00:00",
     allDay: false,
     color: 'blue',
-    display: 'block'
 },
 {
     title: "repos",
