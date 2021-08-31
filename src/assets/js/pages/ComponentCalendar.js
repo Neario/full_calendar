@@ -38,7 +38,7 @@ export class ComponentCalendar extends HTMLElement {
             firstDay: 1, // Premier jour de la semaine à Lundi.
             aspectRatio: 1.85, // Ratio agenda hauteur / witdh.
             eventColor: 'green', // Couleur par défaut des évènements.
-            dayMaxEvents: true,
+            dayMaxEvents: true,// permet de garder la hauteur des grilles , et d'ajouter un bouton pour afficher plus d'évènements
             headerToolbar: {
                 left: 'prev next today title',
                 center: 'custom1',
@@ -59,10 +59,10 @@ export class ComponentCalendar extends HTMLElement {
                 },
             },
             displayEventEnd: true,
-            eventDisplay: 'block',
-            events: this.events,
-            editable: true,
-            selectable: true,
+            eventDisplay: 'block', // Tous les events ce placent en format block.
+            events: this.events, // Récupèrent la liste des évents.
+            editable: false, // Permet le drag and drops , resize les events allday.
+            selectable: true, // Permet de cliquer sur le calendrier ...
             select: function (start, end, jsEvent, view) {
                 let abc = prompt('Entrer le titre');
                 let newEvent = new Object();
