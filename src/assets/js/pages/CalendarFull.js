@@ -1,45 +1,7 @@
-import { Calendar } from '@fullcalendar/core';
-import interactionPlugin from '@fullcalendar/interaction';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-
 (function () {
     class CalendarFull {
 
         static async init() {
-            this.events = [{
-                title: "full calendar",
-                start: "2021-08-18 09:00:00",
-                allDay: true
-            },
-            {
-                title: "Repas",
-                start: "2021-08-18 13:30:00",
-                allDay: false
-            },
-            {
-                "title": "repos",
-                "start": "2021-08-18 12:30:00",
-                "end": "2021-08-18 13:00:00",
-            },
-            {
-                title: "etude",
-                start: "2021-08-18 14:30:00",
-                allDay: false
-            },
-            {
-                title: "encore",
-                start: "2021-08-18 15:30:00",
-                allDay: false
-            },
-            {
-                title: "et toujours",
-                start: "2021-08-18 16:30:00",
-                allDay: false
-            },
-        
-        ]
             this.addEventListeners();
         }
 

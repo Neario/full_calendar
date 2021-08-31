@@ -4,70 +4,44 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 
-export class CompponentCalendar extends HTMLElement {
+export class ComponentCalendar extends HTMLElement {
     static get observedAttributes () {
-        return [];
+        return ['events'];
     }
 
     constructor () {
         super();
-        this.root = this.attachShadow({ mode: "open" });
-        this.calendar = null;
+        this.calendar = "test";
+        this.events = null;
     }
 
     async connectedCallback () {
-        this.container = document.createElement('div')
-        this.root.appendChild(this.container);
-        this.calendar = new Calendar(this.container, this.options)
-        this.events = [{
-            title: "full calendar",
-            start: "2021-08-18 09:00:00",
-            allDay: true
-        },
-        {
-            title: "Repas",
-            start: "2021-08-18 13:30:00",
-            allDay: false
-        },
-        {
-            "title": "repos",
-            "start": "2021-08-18 12:30:00",
-            "end": "2021-08-18 13:00:00",
-        },
-        {
-            title: "etude",
-            start: "2021-08-18 14:30:00",
-            allDay: false
-        },
-        {
-            title: "encore",
-            start: "2021-08-18 15:30:00",
-            allDay: false
-        },
-        {
-            title: "et toujours",
-            start: "2021-08-18 16:30:00",
-            allDay: false
-        },    
-    ];
-    calendar.render();
+        this.container = document.createElement('div');
+        this.container.setAttribute("id", "calendar");
+        this.appendChild(this.container);
+        this.calendar = new Calendar(this.container, this.options);
+        this.calendar.render();
 }
 
     async attributeChangedCallback (name, oldValue, newValue) {
-        
+        if (name === 'events' && newValue !== null) {
+            this.events = JSON.parse(newValue);
+        }
     }
 
     get options() {
         return {
+            themeSystem: 'bootstrap', // thème pour les icons.
+            initialView: 'dayGridMonth', // Vue par défaut de l'agenda.
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-            locale: 'fr',
-            firstDay: 1,
-            initialView: 'dayGridMonth',
-            eventBackgroundColor: 'blue',
+            locale: 'fr', // Changer la langue.
+            firstDay: 1, // Premier jour de la semaine à Lundi.
+            aspectRatio: 1.85, // Ratio agenda hauteur / witdh.
+            eventColor: 'green', // Couleur par défaut des évènements.
             dayMaxEvents: true,
             headerToolbar: {
-                left: 'prev,next today',
-                center: 'title',
+                left: 'prev next today title',
+                center: 'custom1',
                 right: 'dayGridMonth,timeGridWeek,listWeek'
             },
             buttonText: {
@@ -76,25 +50,29 @@ export class CompponentCalendar extends HTMLElement {
                 week: 'Semaine',
                 month: 'Mois'
             },
+            customButtons: {
+                custom1: {
+                    text: 'Créer',
+                    click: () => {
+                        console.log("clic sur le button");
+                    }
+                },
+            },
+            displayEventEnd: true,
+            eventDisplay: 'block',
             events: this.events,
             editable: true,
             selectable: true,
             select: function (start, end, jsEvent, view) {
                 let abc = prompt('Entrer le titre');
                 let newEvent = new Object();
+                newEvent.id = 4;
                 newEvent.title = abc;
-                newEvent.allDay = false;
+                newEvent.allDay = true;
                 newEvent.start = start.start
-                console.log(start.start);
-                if ( newEvent.title !== null) {
-                    if (newEvent.title.length >= 1) {
-                        calendar.addEvent({
-                            title: newEvent.title,
-                            start : newEvent.start,
-                            allDay: newEvent.allDay
-                        })                        
-                    } 
-                }
+                if (newEvent.title.length >= 1) {
+                    this.addEvent(newEvent);
+                }                
             }
         }
     }
