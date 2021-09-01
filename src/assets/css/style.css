@@ -1,11 +1,4 @@
-#container {
-  /* border: 1px solid red; */
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
+
 
 #calendar{
   max-width: 1350px;
@@ -26,4 +19,23 @@
 .fc-event-title-container {
   /* display: none; */
   flex-grow: 0 !important;
+}
+
+#choice-lodgment{
+  margin-top: 30px;
+  display: flex;
+}
+
+form{
+  display: flex;
+  width: 10.5em;
+}
+
+.choices{
+  width: 100%;
+  text-align: center
+}
+
+p{
+  @apply tw-text-red-600;
 }
