@@ -21,6 +21,8 @@
   flex-grow: 0 !important;
 }
 
+
+
 #choice-lodgment{
   margin-top: 30px;
   display: flex;
@@ -36,6 +38,14 @@ form{
   text-align: center
 }
 
+.choices__item--choice{
+  background-color: #EF4444;
+}
+
 p{
   @apply tw-text-red-600;
+}
+td{
+  border: none !important;
+  
 }

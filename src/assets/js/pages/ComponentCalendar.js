@@ -3,6 +3,9 @@ import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import { format } from 'date-fns';
+import {fr} from "date-fns/locale";
+
 
 export class ComponentCalendar extends HTMLElement {
     static get observedAttributes() {
@@ -35,6 +38,7 @@ export class ComponentCalendar extends HTMLElement {
             initialView: 'dayGridMonth', // Vue par défaut de l'agenda.
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
             locale: 'fr', // Changer la langue.
+            firstDay: 1, // Premier jour de la semaine à Lundi.
             headerToolbar: {
                 left: 'prev next today title',
                 center: 'custom1',
@@ -58,12 +62,12 @@ export class ComponentCalendar extends HTMLElement {
             eventDisplay: 'block', // Tous les events ce placent en format block.
             eventColor: 'green', // Couleur par défaut des évènements.
             views: {
-                month: {
-                    firstDay: 1, // Premier jour de la semaine à Lundi.
+                dayGridMonth: {
                     aspectRatio: 1.85, // Ratio agenda hauteur / witdh.
                     dayMaxEvents: true,// permet de garder la hauteur des grilles , et d'ajouter un bouton pour afficher plus d'évènement
                     displayEventEnd: true,
-                    editable: false, // Permet le drag and drops , resize les events allday.
+                    dayHeaderFormat: {weekday: 'long'},
+                    editable: true, // Permet le drag and drops , resize les events allday.
                     selectable: true, // Permet de cliquer sur le calendrier ...
                     select: function (start, end, jsEvent, view) {
                         let abc = prompt('Entrer le titre');
@@ -78,8 +82,18 @@ export class ComponentCalendar extends HTMLElement {
                     }
 
                 },
-                timeGrid:{
-                    
+                timeGridWeek:{
+                    firstDay: 1,
+                    titleFormat: { year: 'numeric', month: '2-digit', day: '2-digit' },
+                    allDaySlot: false,
+                    dayHeaderContent: function(date, text) {
+                        const dayLong = format(date.date,'iiii', {locale: fr})
+                        const month = format(date.date,'dd MMM', {locale: fr})
+                        return {html : `${dayLong} <br> ${month}`} ;
+                    },
+                    slotDuration: '01:00:00',
+                    dayMaxEvents: true,
+                    aspectRatio: 2,
                 }
             }
         }

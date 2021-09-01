@@ -6,11 +6,6 @@ const events = [
     color: 'blue',
 },
 {
-    title: "repos",
-    start: "2021-09-04 12:30:00",
-    end: "2021-09-04 13:00:00",
-},
-{
     title: "etude",
     start: "2021-08-18 09:00:00",
 },
@@ -23,7 +18,14 @@ const events = [
     start: "2021-09-14 16:30:00",
     end: "2021-09-16 15:30:00",
     allDay: true
-}];
+},
+{
+    start: '2021-09-14',
+    end: '2021-09-16',
+    overlap: false,
+    display: 'background',
+    color: '#dddd'
+  }];
 
 const calendar = document.body.querySelector('full-calendar')
 calendar.setAttribute('events',JSON.stringify(events))

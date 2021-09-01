@@ -9,5 +9,6 @@ const select = new ChoicesJs('select', {
             searchPlaceholderValue: 'Rechercher',
             itemSelectText: "",
             noResultsText: "Aucune company trouvée",
-            shouldSort: false
+            shouldSort: false,
 });
+select.unhighlightAll()
