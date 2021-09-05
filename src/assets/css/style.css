@@ -17,7 +17,7 @@
 }
 
 .fc-event-title-container {
-  /* display: none; */
+  display: none; 
   flex-grow: 0 !important;
 }
 
@@ -45,7 +45,7 @@ form{
 p{
   @apply tw-text-red-600;
 }
-td{
+/*td{
   border: none !important;
   
-}
+}*/

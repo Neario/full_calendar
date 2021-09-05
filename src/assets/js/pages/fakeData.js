@@ -11,7 +11,7 @@ const events = [
 },
 {
     title: "encore",
-    start: "2021-09-01 15:30:00",
+    start: "2021-09-01 15:00:00",
 },
 {
     title: "AllDay",
